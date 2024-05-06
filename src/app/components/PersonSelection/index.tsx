@@ -20,7 +20,7 @@ const PersonChip = styled.div`
     gap: 8px;
     align-items: center;
     border-radius: 16px;
-    color: #462e67;
+    color: var(--color-text-primary);
     background-color: #f1f1ff;
     border: 1px solid #f1f1ff;
     font-size: 10px;
@@ -45,7 +45,7 @@ export default function PersonSelection({
     recipients,
     onClick,
 }: PersonSelectionProps) {
-    const { recipient: recipientId } = useTokenSending();
+    const { recipient: currentRecipient } = useTokenSending();
     return (
         <PersonSelectionStyled>
             {recipients.slice(0, 3).map((recipient) => (
@@ -53,7 +53,9 @@ export default function PersonSelection({
                     key={recipient.username}
                     onClick={() => onClick && onClick(recipient)}
                     className={
-                        recipient.username === recipientId ? 'selected' : ''
+                        recipient.username === currentRecipient?.username
+                            ? 'selected'
+                            : ''
                     }
                 >
                     <Image

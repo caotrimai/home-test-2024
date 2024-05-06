@@ -6,9 +6,16 @@ export const getTokenAvatar = (tokenId: RawValueType, tokenList: Token[]) => {
     return token?.picture || '';
 };
 
-export function formatAmount(num: number) {
+export const formatAmount = (num: number) => {
+    if (isNaN(num)) return '0.0';
+    if (num % 1 === 0) {
+        return num.toLocaleString('en-US', {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+        });
+    }
     return num.toLocaleString('en-US', {
         minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
+        maximumFractionDigits: 18,
     });
-}
+};

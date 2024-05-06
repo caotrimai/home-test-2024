@@ -36,7 +36,7 @@ const NumericInputStyled = styled(Input)`
             height: 100%;
             padding-right: 16px;
             font-size: 10px;
-            color: #868098;
+            color: var(--color-text-secondary);
             background-color: var(--color-bg-input-primary);
             border-radius: 0 16px 16px 0;
             border: unset;

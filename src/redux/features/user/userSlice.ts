@@ -19,6 +19,18 @@ const initialState: UserSliceState = {
             token: 'ETH',
             balance: 23341,
         },
+        {
+            token: 'BNB',
+            balance: 5.03,
+        },
+        {
+            token: 'BTC',
+            balance: 0.000023,
+        },
+        {
+            token: 'SOL',
+            balance: 0.5,
+        },
     ],
 };
 

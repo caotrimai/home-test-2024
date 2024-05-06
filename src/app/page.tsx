@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import SendTo from '@/app/components/SendTo';
 
 const HomeStyled = styled.main`
-    background-color: #e3e3e3;
+    background-color: var(--color-bg-page);
     min-height: 100svh;
+    padding: calc(var(--gap-primary) * 2);
 `;
 
 export default function Home() {

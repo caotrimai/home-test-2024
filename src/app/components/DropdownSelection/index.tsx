@@ -19,7 +19,7 @@ const DropdownSelectionStyled = styled.div`
     }
 
     & .ant-select-selection-item {
-        color: #462e67;
+        color: var(--color-text-primary);
         font-size: 14px;
     }
 `;

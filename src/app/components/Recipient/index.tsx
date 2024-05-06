@@ -8,17 +8,20 @@ import TokenAndAmount from '@/app/components/TokenAndAmount';
 import Button from '@/app/components/Button';
 
 const RecipientStyled = styled.div`
-    width: 100%;
+    @media (max-width: 640px) {
+        width: 100%;
+    }
+    width: calc(50% - (var(--gap-primary) * 2));
     min-height: 52px;
 
     & .label-to {
         font-size: 14px;
-        color: #868098;
+        color: var(--color-text-secondary);
         margin-bottom: 8px;
     }
     & .ant-select-arrow {
         font-size: 18px;
-        color: #462e67;
+        color: var(--color-text-primary);
         right: 20px;
     }
 `;
@@ -76,7 +79,7 @@ export default function Recipient() {
             <DropdownSelection
                 options={recipientOptions}
                 onChange={handleDropdownChange}
-                value={recipient}
+                value={recipient?.username}
             />
             <PersonSelection
                 recipients={recipients}
@@ -94,6 +97,7 @@ export default function Recipient() {
                 type="primary"
                 style={{ width: '100%' }}
                 onClick={sendToken}
+                disabled={!recipient || !token || !Number(amount)}
             >
                 Send
             </Button>

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Recipient from '../Recipient';
 import TokenSendingProvider from '@/app/providers/TokenSendingProvider';
 import { CloseOutlined } from '@ant-design/icons';
+import RecipientSummary from '@/app/components/RecipientSummary';
 
 const SendToStyled = styled.div`
     display: flex;
@@ -9,7 +10,10 @@ const SendToStyled = styled.div`
     background-color: var(--color-white);
     border-radius: 36px;
     padding: 24px;
+    max-width: 1024px;
+    min-width: 375px; // iphone SE
     position: relative;
+    transform: translateX(calc(-50% + 50vw - var(--gap-primary)));
 
     & .header {
         display: flex;
@@ -26,6 +30,10 @@ const SendToStyled = styled.div`
     & .main {
         display: flex;
         flex-direction: row;
+        gap: calc(var(--gap-primary) * 4);
+        @media (max-width: 640px) {
+            flex-direction: column;
+        }
     }
 `;
 
@@ -39,7 +47,7 @@ export default function SendTo() {
                 </div>
                 <div className="main">
                     <Recipient />
-                    <div style={{ width: '100%' }} />
+                    <RecipientSummary />
                 </div>
             </SendToStyled>
         </TokenSendingProvider>

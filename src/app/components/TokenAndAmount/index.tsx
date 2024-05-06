@@ -14,7 +14,7 @@ const TokenAndAmountStyled = styled.div`
 
     & .section-name {
         font-size: 14px;
-        color: #868098;
+        color: var(--color-text-secondary);
     }
     & .main-content {
         display: flex;
@@ -22,19 +22,19 @@ const TokenAndAmountStyled = styled.div`
         gap: var(--gap-primary);
     }
     & .ant-select-selection-placeholder {
-        color: #ffffff;
+        color: var(--color-white);
     }
     & .ant-select-outlined .ant-select-selector {
-        color: #ffffff;
-        background-color: #462e67;
+        color: var(--color-white);
+        background-color: var(--color-text-primary);
         border-radius: 16px;
         height: 52px;
 
         & + span.ant-select-arrow {
-            color: #ffffff;
+            color: var(--color-white);
         }
         & .ant-select-selection-item {
-            color: #ffffff;
+            color: var(--color-white);
         }
     }
 `;

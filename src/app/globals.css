@@ -52,11 +52,16 @@ table {
     --color-btn-disabled: #868098;
     --color-text-disabled: #FFFFFF;
     --color-bg-input-primary: #FBFAFB;
+    --color-bg-page: #e3e3e3;
     --boder-radius-primary: 16px;
     --boder-radius-secondary: 24px;
     --gap-primary: 8px;
     --color-border-primary: #846DA3;
     --color-border-secondary: #B4AFC2;
+    --color-border-tertiary: #F5F4F7;
     --border-primary: 1px solid var(--color-border-primary);
     --border-secondary: 1px solid var(--color-border-secondary);
+    --border-tertiary: 1px solid var(--color-border-tertiary);
+    --border-divider: dashed 1px #F5F4F7;
+    --break-point-mobile: 640px;
 }

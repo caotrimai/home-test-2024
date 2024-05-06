@@ -32,40 +32,40 @@ const mockRecipientList: Recipient[] = [
     {
         username: 'bigbear444',
         name: 'Marvin McKinney',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/1.png',
     },
     {
         username: 'tinypanda866',
         name: 'Leslie Alexander',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/2.png',
     },
     {
         username: 'hawkins1001',
         name: 'Guy Hawkins',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/3.png',
     },
     {
         username: 'sliverlion355',
         name: 'Daryl Lawson',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/4.png',
     },
     {
         username: 'blueladybug463',
         name: 'Arlene Robertson',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/5.png',
     },
     {
         username: 'lazymeercat616',
         name: 'Micheal Fisher',
-        picture: 'https://i.pravatar.cc/300',
+        picture: '/images/users/6.png',
     },
 ];
 
 interface TokenSendingState {
-    recipient?: string;
+    recipient?: Recipient;
     token: Token;
     amount: string;
-    setRecipient: (recipient: string | undefined) => void;
+    setRecipient: (recipient: string) => void;
     setToken: (token: Token) => void;
     setAmount: (amount: string) => void;
     isSending: boolean;
@@ -75,11 +75,11 @@ interface TokenSendingState {
 }
 
 const initialState: TokenSendingState = {
-    recipient: '',
+    recipient: undefined,
     token: mockTokenList[0],
     amount: '0.0',
     isSending: false,
-    setRecipient: (recipient: string | undefined) => {},
+    setRecipient: (recipient: string) => {},
     setToken: (token: Token) => {},
     setAmount: (amount: string) => {},
     sendToken: async () => {},
@@ -98,7 +98,9 @@ export default function TokenSendingProvider({
 }: {
     children: ReactNode;
 }) {
-    const [recipient, setRecipient] = useState<string | undefined>(undefined);
+    const [recipient, setRecipientPerson] = useState<Recipient | undefined>(
+        undefined,
+    );
     const [token, setToken] = useState<Token>(mockTokenList[0]);
     const [amount, setAmount] = useState('0.0');
     const [isSending, setIsSending] = useState(false);
@@ -111,9 +113,20 @@ export default function TokenSendingProvider({
         return mockTokenList;
     };
 
+    const setRecipient = (recipientUsername: string) => {
+        const recipientPerson = mockRecipientList.find(
+            ({ username }) => username === recipientUsername,
+        );
+        setRecipientPerson(recipientPerson);
+    };
+
     const sendToken = async () => {
         console.log('Sending token...');
-        console.log({ recipient, token: token.name, amount });
+        console.log({
+            recipient: recipient?.username,
+            token: token.name,
+            amount,
+        });
         setIsSending(true);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setIsSending(false);

@@ -5,7 +5,7 @@ import { MouseEventHandler } from 'react';
 const QrButtonStyled = styled.div`
     width: 52px;
     height: 52px;
-    background-color: #fbfafb;
+    background-color: var(--color-bg-input-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,7 +28,7 @@ export default function QrButton({ onClick }: QrButtonProps) {
                 alt="QR Scanner"
                 width={24}
                 height={24}
-                priority={false}
+                priority
             />
         </QrButtonStyled>
     );

@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 const OptionLabelStyled = styled.div`
     margin-left: 10px;
     font-size: 14px;
-    color: #462e67;
+    color: var(--color-text-primary);
     & .hashtag {
         font-size: 12px;
-        color: #868098;
+        color: var(--color-text-secondary);
     }
 `;
 
