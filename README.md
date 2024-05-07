@@ -2,8 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-[Demo](https://home-test-rep-run.vercel.app/)
+[DEMO](https://home-test-rep-run.vercel.app/)
 
+## Setup
 First, run the development server:
 
 ```bash
@@ -22,17 +23,40 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+This project follows a specific structure to ensure code maintainability and readability. Here's a brief overview of the project's structure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/`: This is the main directory where all the source code of the application resides.
+    - `app/`: This directory contains the main application logic.
+        - `providers/`: Contains context providers like `TokenSendingProvider.tsx` which manages the state and functions related to token sending.
+        - `components/`: Contains reusable components like `RecipientSummary` which displays a summary of the recipient's details.
+    - `redux/`: This directory contains all the Redux related files for state management.
+        - `features/`: Contains slices of the Redux store, for example `user/userSlice.ts` which manages the user state.
+        - `hooks.ts`: Contains custom hooks for accessing and dispatching actions to the Redux store.
+- `public/`: This directory contains all the static files like images.
+- `styles/`: This directory contains all the global styles.
+- `tests/`: This directory contains all the test files.
+- `package.json`: This file contains the list of project dependencies and scripts.
+- `tsconfig.json`: This file is used by TypeScript compiler to determine which files to compile and what compilation options to use.
+- `README.md`: This file provides an overview of the project and instructions on how to run and contribute to the project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Implementation Decisions
 
-## Deploy on Vercel
+This section outlines the reasons behind specific implementation choices made during the development of this project.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js**: We chose Next.js as our primary framework due to its out-of-the-box support for server-side rendering and static site generation. This allows us to optimize our application for performance and SEO. Additionally, Next.js has a strong community and a rich ecosystem of plugins, which makes it a robust and reliable choice for our project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **TypeScript**: TypeScript was chosen for its static typing features. This helps us catch errors early in the development process, and enhances our development experience with features like autocompletion, type inference, and type checking.
+
+- **React**: React was chosen for its component-based architecture, which allows us to build reusable components and manage their state effectively. It also has a large community and a wide range of third-party libraries.
+
+- **Redux**: We chose Redux for state management to maintain a predictable state container that is easy to manage and debug. It also integrates well with our choice of UI library, React.
+
+- **Ant Design (Antd)**: Antd was chosen for its rich set of high-quality React components out of the box. This helps us speed up development by reusing these components instead of building everything from scratch. Antd also provides a consistent design language, ensuring our application has a professional look and feel. Furthermore, it supports internationalization, allowing us to easily adapt our application for different locales.
+
+- **Emotion**: We chose Emotion for styling our components. It allows us to write CSS in JavaScript, providing us with the power to dynamically style our components based on the component's props or a global theme.
+
+## Completion Time
+
+The project took approximately 2 days to complete, including setting up the project, implementing the features, writing tests, and documenting the project.
