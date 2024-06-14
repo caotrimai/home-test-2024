@@ -1,23 +1,31 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = 'maicaotri/next-app'
+        DOCKER_TAG = 'latest'
+    }
+
     stages {
         stage('Build') {
             steps {
-                // Clean before build
-                cleanWs()
-
-                echo 'Building..'
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                }
             }
         }
-        stage('Test') {
+        stage('Push') {
             steps {
-                echo 'Testing..'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                        dockerImage.push()
+                    }
+                }
             }
         }
-        stage('Deploy') {
+        stage('Run') {
             steps {
-                echo 'Deploying....'
+                sh "docker run -d -p 3000:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
     }
