@@ -1,9 +1,10 @@
 pipeline {
-    agent { docker: true }
+    agent any
 
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
         DOCKER_TAG = 'latest'
+        DOCKER_HUB_CREDENTIAL = 'dockerhub-user-password'
     }
 
     stages {
@@ -14,10 +15,10 @@ pipeline {
                 }
             }
         }
-        stage('Push') {
+        stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIAL) {
                         dockerImage.push()
                     }
                 }
