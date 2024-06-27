@@ -15,13 +15,25 @@ pipeline {
 //             }
 //         }
         stage('Push') {
-            steps {
-                script {
-                    withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
-                        dockerImage.push()
+            withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
+                steps {
+                    script {
+//                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-secret-text') {
+//                             dockerImage.push()
+//                         }
+                        withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
+                            dockerImage.push()
+                        }
                     }
                 }
             }
+//             steps {
+//                 script {
+//                     withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
+//                         dockerImage.push()
+//                     }
+//                 }
+//             }
         }
 //         stage('Delete Local Image') {
 //             steps {
