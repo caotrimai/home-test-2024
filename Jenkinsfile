@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
         DOCKER_TAG = 'latest'
+        DOCKERHUB_SECRET_ACCESS_KEY = credentials('dockerhub-secret-text')
     }
 
     stages {
@@ -16,13 +17,18 @@ pipeline {
 //         }
         stage('Push') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
-                    script {
-                        withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
-                            dockerImage.push()
-                        }
-                    }
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'TOKEN')]) {
+                        dockerImage.push("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                   }
                 }
+//                 withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
+//                     script {
+//                         withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
+//                             dockerImage.push()
+//                         }
+//                     }
+//                 }
             }
 //             steps {
 //                 script {
