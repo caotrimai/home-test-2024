@@ -15,12 +15,9 @@ pipeline {
 //             }
 //         }
         stage('Push') {
-            withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
-                steps {
+            steps {
+                withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
                     script {
-//                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-secret-text') {
-//                             dockerImage.push()
-//                         }
                         withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
                             dockerImage.push()
                         }
