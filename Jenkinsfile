@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker: true }
+    agent any
 
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
