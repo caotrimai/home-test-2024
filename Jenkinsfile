@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { docker: true }
 
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
@@ -7,13 +7,25 @@ pipeline {
     }
 
     stages {
-        stage('Build and push docker image') {
+        stage('Build') {
             steps {
-            // build docker image
                 script {
-//                     sh "docker image build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                    withDockerRegistry('https://registry.hub.docker.com', 'dockerhub-secret-text') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Delete Local Image') {
+            steps {
+                sh "docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
     }
