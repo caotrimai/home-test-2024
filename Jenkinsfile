@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'maicaotri/next-app'
+        DOCKER_IMAGE = 'next-app'
         DOCKER_TAG = 'latest'
     }
 
@@ -11,7 +11,7 @@ pipeline {
             steps {
             // build docker image
                 script {
-                    docker.build "${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    sh "docker image build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
