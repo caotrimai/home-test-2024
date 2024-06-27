@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { docker: true }
 
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
@@ -8,15 +8,24 @@ pipeline {
 
     stages {
         stage('Build') {
-              steps {
-                echo 'Building..'
-                docker.build image: "${DOCKER_IMAGE}:${DOCKER_TAG}"
-                docker.push image: "${DOCKER_IMAGE}:${DOCKER_TAG}"
-              }
-        }
-        stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-secret-text') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Run') {
+            steps {
+                sh "docker run -d -p 3000:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
     }
