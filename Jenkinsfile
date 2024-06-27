@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
         DOCKER_TAG = 'latest'
-        DOCKERHUB_SECRET_ACCESS_KEY = credentials('dockerhub-secret-text')
     }
 
     stages {
