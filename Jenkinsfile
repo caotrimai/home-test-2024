@@ -7,14 +7,14 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build Image') {
             steps {
                 script {
                     dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
             }
         }
-        stage('Push') {
+        stage('Push Image') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-secret-text') {
@@ -23,9 +23,9 @@ pipeline {
                 }
             }
         }
-        stage('Run') {
+        stage('Remove Local Image') {
             steps {
-                sh "docker run -d -p 3000:3000 ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
     }
