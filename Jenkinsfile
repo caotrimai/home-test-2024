@@ -18,17 +18,10 @@ pipeline {
         stage('Push') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'TOKEN')]) {
+                    docker.withRegistry('', registryCredential) {
                         dockerImage.push("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                   }
+                    }
                 }
-//                 withCredentials([string(credentialsId: 'dockerhub-secret-text', variable: 'DOCKERHUB_SECRET')]) {
-//                     script {
-//                         withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'dockerhub-secret-text']) {
-//                             dockerImage.push()
-//                         }
-//                     }
-//                 }
             }
 //             steps {
 //                 script {
