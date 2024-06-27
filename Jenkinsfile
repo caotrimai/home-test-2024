@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'maicaotri/next-app'
         DOCKER_TAG = 'latest'
+        registryCredential = 'dockerhub-secret-text'
     }
 
     stages {
